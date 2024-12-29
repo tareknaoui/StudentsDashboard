@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Ajouter un étudiant</title>
+</head>
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .add-student-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+
+        aside {
+        grid-area: aside;
+        background: #fff;
+        padding: 20px;
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        width: 250px;
+        margin-left: 25px;
+    }
+    
+    .menu-items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        text-decoration: none;
+        color: #666;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .menu-item i {
+        margin-right: 10px;
+        width: 24px;
+        text-align: center;
+    }
+    
+    .menu-item:hover {
+        background-color: #f0f0f0;
+        color: #007bff;
+    }
+    
+    .menu-item.active {
+        background-color: #007bff;
+        color: white;
+    }
+    
+    body {
+        display: grid;
+        grid-template-areas: 
+            "header header"
+            "aside main"
+            "footer footer";
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: auto 1fr auto;
+        gap: 25px;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 100vh;
+        background-color: #f0f2f5;
+    }
+    </style>
+<body>
+    <header>
+        <div>Logo</div>
+        <div class="title">Ajouter un étudiant</div>
+        <div><button onclick="window.location.href='/'">Retour</button></div>
+    </header>
+
+    <aside>
+        <div class="menu">
+            <nav class="menu-items">
+                <a href="/" class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/etudiants" class="menu-item active">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Étudiants</span>
+                </a>
+                <a href="/statistiques" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Statistiques</span>
+                </a>
+                <a href="/specialites" class="menu-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Spécialités</span>
+                </a>
+                <a href="/parametres" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+    <main>
+        <div class="form-container">
+            <form class="add-student-form">
+                <div class="form-group">
+                    <label for="annee">Année</label>
+                    <input type="number" id="annee" name="annee" required min="2000" max="2024">
+                </div>
+                <div class="form-group">
+                    <label for="matricule">Matricule</label>
+                    <input type="text" id="matricule" name="matricule" required>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                </div>
+                <div class="form-group">
+                    <label for="sexe">Sexe</label>
+                    <select id="sexe" name="sexe" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="H">Homme</option>
+                        <option value="F">Femme</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="specialite">Spécialité</label>
+                    <select id="specialite" name="specialite" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="math">Mathématiques</option>
+                        <option value="info">Informatique</option>
+                        <option value="physique">Physique</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="moyenne">Moyenne</label>
+                    <input type="number" id="moyenne" name="moyenne" step="0.01" min="0" max="20" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Enregistrer</button>
+                    <button type="reset" class="btn-secondary">Réinitialiser</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>Footer</p>
+    </footer>
+</body>
+</html>
+
