@@ -19,7 +19,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Header */
 header {
     grid-area: header;
     position: sticky;
@@ -57,7 +56,6 @@ header {
     font-weight: 600;
 }
 
-/* Sidebar */
 aside {
     position: sticky;
     top: 80px; /* Header height + spacing */
@@ -122,7 +120,6 @@ aside {
 
 
 
-/* Main Content */
 main {
     grid-area: main;
     padding: 20px;
@@ -132,7 +129,6 @@ main {
     margin: 0 20px;
 }
 
-/* Stats Cards */
 .stats-cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -206,7 +202,6 @@ main {
     font-size: 14px;
 }
 
-/* Footer */
 .footer {
     grid-area: footer;
     position: relative;
